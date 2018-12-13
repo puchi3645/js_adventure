@@ -24,8 +24,15 @@ document.dispatchEvent(setGame);
  *  'ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft'
  *
  */
-const arrowPressed = (key) => {
-    /* Write your code in here */
+const arrowPressed = (key) => { //console.log(key);
+if(key==='ArrowUp')
+	spaceship.moveUp();
+else if(key==='ArrowDown')
+		spaceship.moveDown();
+else if(key==='ArrowLeft')
+	spaceship.moveLeft();
+else 
+	spaceship.moveRight();
 };
 
 /*
@@ -49,7 +56,14 @@ const arrowPressed = (key) => {
  *      GAME_OVER - a const, that is the level that represents completion of game
  *
  */
- const nextLevelBtnPressed = () => {
+ const nextLevelBtnPressed = () => {  console.log(levels.getCurrentLevel());
+	let currentLevel = levels.getCurrentLevel();
+
+	if(!levels.isGameover() && spaceship.isLanded())
+	{
+		levels.setCurrentLevel(currentLevel+1);
+	}
+	messageBox.innerHTML=getMessage(levels.getCurrentLevel());
      /* Write your code in here */
  };
 
@@ -85,5 +99,16 @@ const arrowPressed = (key) => {
   */
 
 /* Write your code here */
+function getMessage(level){
+	
+	if(level==1)
+		return('Level 1');
+	else if(level==2)
+		return('Level 2');
+	else if(level==3)
+		return('Level 3');
+	else
+		return ('GAME_OVER');
+}
 
 export {arrowPressed, nextLevelBtnPressed};
